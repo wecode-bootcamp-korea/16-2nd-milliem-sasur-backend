@@ -1,7 +1,7 @@
 from django.db     import models
 
 class Library(models.Model):
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='libraries')
+    user = models.OneToOneField('library.Library', on_delete=models.CASCADE, related_name='libraries')
 
     class Meta:
         db_table = 'libraries'

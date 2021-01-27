@@ -13,7 +13,8 @@ class User(models.Model):
     usertype          = models.ForeignKey('UserType', on_delete = models.CASCADE)
     subscribe         = models.ManyToManyField('Subscribe', through ='UserSubscribe', related_name = 'users')
     review            = models.ManyToManyField('book.Review', through='book.ReviewLike', related_name='users')
-
+    library           = models.OneToOneField('library.Library', on_delete=models.CASCADE, related_name='users')
+    
     class Meta:
         db_table = 'users'
 
