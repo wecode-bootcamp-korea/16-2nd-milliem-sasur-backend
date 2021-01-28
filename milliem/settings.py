@@ -40,12 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'django_extensions',
+    'django_seed',
     'users',
     'book',
     'library'
 ]
 
 MIDDLEWARE = [
+
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

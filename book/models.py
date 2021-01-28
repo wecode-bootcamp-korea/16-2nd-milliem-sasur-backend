@@ -40,14 +40,14 @@ class Publisher(models.Model):
         db_table = 'publishers'
 
 class Series(models.Model):
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=45)
 
     class Meta:
         db_table='series'
 
 class Subcategory(models.Model):
     name     = models.CharField(max_length=45)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='subcateories') 
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='subcategories') 
 
     class Meta:
         db_table='subcategories'
