@@ -5,13 +5,11 @@ from django.core.management.base import BaseCommand
 from django.utils.crypto import get_random_string
 from django_seed import Seed
 
-# from users.models import *
-# from book.models import *
-# from library.models import *
+from users.models import *
+from book.models import *
+from library.models import *
 
 from faker import Faker
-
-# print(__name__)
 from data import seed_info
 
 
@@ -23,41 +21,42 @@ class Command(BaseCommand):
         print(seed_info.__name__)
 
 
-#         number = options.get("number")
-#         fake   = Faker(["ko_KR"])
-#         seeder = Seed.seeder()
+        number = options.get("number")
+        fake   = Faker(["ko_KR"])
+        seeder = Seed.seeder()
 
-#         start_date            = datetime.date(1980, 1, 1)
-#         end_date              = datetime.date(2020, 1, 1)
-#         time_between_dates    = end_date - start_date
-#         days_between_dates    = time_between_dates.days
-#         random_number_of_days = random.randrange(days_between_dates)
-#         random_date = start_date + datetime.timedelta(days=random_number_of_days)
+        start_date            = datetime.date(1980, 1, 1)
+        end_date              = datetime.date(2020, 1, 1)
+        time_between_dates    = end_date - start_date
+        days_between_dates    = time_between_dates.days
+        random_number_of_days = random.randrange(days_between_dates)
+        random_date = start_date + datetime.timedelta(days=random_number_of_days)
 
-#         seeder.add_entity(
-#             Book,
-#             number,
-#             {
-#                  title            = lambda x: random.choices(seed_info.book_summary,
-#                  summary          = lambda x: random.choices(seed_info.book_summary),
-#                  translator       = lambda x: fake.name(),
-#                  sub_title        = lambda x: fake.sentence(),
-#                  description      = lambda x: fake.text(),
-#                  page             = lambda x: random.randint(300, 1000)
-#                  capacity         = lambda x: f'{random.randint(25, 1000)}MB'
-#                  pub_date         = lambda x: fake.date(),
-#                  launched_date    = lambda x: fake.date(),
-#                  contents         = lambda x: fake.text(),
-#                  publisher_review = lambda x: fake.text(),
-#                  image_url        = lambda x: fake.name(),
-#                  purchase_url     = lambda x: fake.name(),
-#                  author           = lambda x: Author.objects.
-#                  sub_category     = lambda x: fake.name(),
-#                  publisher        = lambda x: fake.name(),
-#                  series           = lambda x: fake.name(),
-#                  shelf            = lambda x: fake.name(),
-#         #     },
-#         # )
+        seeder.add_entity(
+            Book,
+            number,
+            {
+                 title            = lambda x: random.choices(seed_info.book_summary,
+                 summary          = lambda x: random.choices(seed_info.book_summary),
+                 translator       = lambda x: fake.name(),
+                 sub_title        = lambda x: fake.sentence(),
+                 description      = lambda x: fake.text(),
+                 page             = lambda x: random.randint(300, 1000)
+                 capacity         = lambda x: f'{random.randint(25, 1000)}MB'
+                 pub_date         = lambda x: fake.date(),
+                 launched_date    = lambda x: fake.date(),
+                 contents         = lambda x: fake.text(),
+                 publisher_review = lambda x: fake.text(),
+                 image_url        = lambda x: fake.name(),
+                 purchase_url     = lambda x: fake.name(),
+                 author           = lambda x: Author.objects.
+                 sub_category     = lambda x: fake.name(),
+                 publisher        = lambda x: fake.name(),
+                 series           = lambda x: fake.name(),
+                 shelf            = lambda x: fake.name(),
+            },
+        )
+
 #         # # Author
 #         # seeder.add_entity(
 #         #     Author,

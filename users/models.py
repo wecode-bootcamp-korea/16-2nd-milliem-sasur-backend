@@ -14,11 +14,7 @@ class User(models.Model):
     subscribe         = models.ManyToManyField('Subscribe', through ='UserSubscribe', related_name = 'users')
     review            = models.ManyToManyField('book.Review', through='book.ReviewLike', related_name='users')
     library           = models.OneToOneField('library.Library', on_delete=models.CASCADE, related_name='users')
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 7d1eec5b17691b3ccf74b0211fbf5017380dd500
     class Meta:
         db_table = 'users'
 
