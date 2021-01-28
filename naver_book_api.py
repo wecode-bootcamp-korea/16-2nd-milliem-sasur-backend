@@ -6,7 +6,7 @@ from   faker import Faker
 import pandas as pd
 import urllib.request
 
-faker = Faker()
+faker = Faker('ko_KR')
 
 client_id     = "D0lj0dwSs9pw8T4tHNo2"
 client_secret = "bog5VuUDnc"
@@ -47,13 +47,13 @@ for start_index in range(start, end, display):
             image        = items[item_index]['image']
             author       = items[item_index]['author']
             price        = items[item_index]['price']
-            discount     = items[item_index]['discount']
-            publisher    = items[item_index]['publisher']
-            isbn         = items[item_index]['isbn']
-            description  = re.sub(remove_tag, '', items[item_index]['description'])
+            # discount     = items[item_index]['discount']
+            # publisher    = items[item_index]['publisher']
+            # isbn         = items[item_index]['isbn']
+            contents     = re.sub(remove_tag, '', items[item_index]['description'])
             pubdate      = items[item_index]['pubdate']
             
-            book_df.loc[idx] = [title, purchase_url, image, author, price, discount, publisher, isbn, description, pubdate]
+            book_df.loc[idx] = [title, purchase_url, image, author, price, discount, publisher, isbn, contents, pubdate]
 
             idx += 1
     else:

@@ -32,13 +32,8 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(null=True)),
                 ('page', models.PositiveIntegerField(null=True)),
                 ('capacity', models.IntegerField(null=True)),
-<<<<<<< HEAD
                 ('pub_date', models.DateField()),
                 ('launch_date', models.DateField()),
-=======
-                ('pub_date_p', models.DateField()),
-                ('launched_date', models.DateField()),
->>>>>>> 7d1eec5b17691b3ccf74b0211fbf5017380dd500
                 ('contents', models.TextField(null=True)),
                 ('publisher_review', models.TextField(null=True)),
                 ('image_url', models.URLField(max_length=2045, null=True)),

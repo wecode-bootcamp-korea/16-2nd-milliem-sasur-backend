@@ -24,15 +24,10 @@ class Book(models.Model):
         db_table='books'
 
 class Author(models.Model):
-<<<<<<< HEAD
-    name        = models.CharField(max_length=20)
-    description = models.TextField()
-=======
     name              = models.CharField(max_length=20)
     description       = models.TextField()
     profile_image_url = models.URLField(max_length=2000, null=True)
     
->>>>>>> 7d1eec5b17691b3ccf74b0211fbf5017380dd500
 
     class Meta:
         db_table = 'authors'
@@ -45,22 +40,14 @@ class Publisher(models.Model):
         db_table = 'publishers'
 
 class Series(models.Model):
-<<<<<<< HEAD
-    name = models.CharField(max_length=10)
-=======
     name = models.CharField(max_length=45)
->>>>>>> 7d1eec5b17691b3ccf74b0211fbf5017380dd500
 
     class Meta:
         db_table='series'
 
 class Subcategory(models.Model):
     name     = models.CharField(max_length=45)
-<<<<<<< HEAD
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='subcateories') 
-=======
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='subcategories') 
->>>>>>> 7d1eec5b17691b3ccf74b0211fbf5017380dd500
 
     class Meta:
         db_table='subcategories'
