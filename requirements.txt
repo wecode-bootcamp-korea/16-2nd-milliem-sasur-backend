@@ -5,15 +5,12 @@ bcrypt==3.2.0
 certifi==2020.12.5
 cffi==1.14.4
 chardet==4.0.0
-colorama==0.4.4
-cryptography==3.2.1
 decorator==4.4.2
 defusedxml==0.6.0
 Django==3.1.5
 django-allauth==0.44.0
 django-cors-headers==3.6.0
 django-extensions==3.1.0
-Faker==5.7.0
 idna==2.10
 ipython==7.19.0
 ipython-genutils==0.2.0
@@ -22,8 +19,6 @@ jedi==0.18.0
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
 mysqlclient==2.0.3
-numpy==1.19.5
-pandas==1.2.1
 parso==0.8.1
 pexpect==4.8.0
 pickleshare==0.7.5
@@ -34,12 +29,10 @@ pycparser==2.20
 Pygments==2.7.4
 PyJWT==2.0.0
 pylint==2.6.0
-python-dateutil==2.8.1
 pytz==2020.5
 requests==2.25.1
 six==1.15.0
 sqlparse==0.4.1
-text-unidecode==1.3
 toml==0.10.2
 traitlets==5.0.5
 urllib3==1.26.2

@@ -22,17 +22,10 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     #'django.contrib.admin',
     #'django.contrib.auth',
-<<<<<<< HEAD
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django_extensions',
-    'corsheaders',
     'users',
     'book',
-    'library'
-=======
+    'library',
+    
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -40,10 +33,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_extensions",
     "django_seed",
-    "users",
-    "book",
-    "library",
->>>>>>> 7d1eec5b17691b3ccf74b0211fbf5017380dd500
+
 ]
 
 MIDDLEWARE = [
