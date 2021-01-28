@@ -11,4 +11,8 @@ class Shelf(models.Model):
     library = models.ForeignKey(Library, on_delete=models.CASCADE, related_name='shelves')
 
     class Meta:
+<<<<<<< HEAD
         db_table = 'shelves'
+=======
+        db_table = 'shelves'
+>>>>>>> 7d1eec5b17691b3ccf74b0211fbf5017380dd500
