@@ -1,3 +1,16 @@
+# seed folder
+management/
+
+# db
+milliem_bak.sql
+
+
+### data file ###
+data/
+etc/
+milliem_bak.sql
+
+# etc..
 my_settings.py
 .DS_Store
 .vscode/settings.json
