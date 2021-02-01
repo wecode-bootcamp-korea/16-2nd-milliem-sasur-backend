@@ -2,13 +2,15 @@ import json
 import bcrypt
 import re
 import requests
+import jwt
 
-from twilio.rest  import Client
-from django.views import View
-from django.http  import JsonResponse
-from random       import randint
-from users.models import User, PhoneCheck
-from my_settings  import ACCOUNT_SID, AUTH_TOKEN
+from twilio.rest    import Client
+from django.views   import View
+from django.http    import JsonResponse
+from random         import randint
+from users.models   import User, PhoneCheck, UserType
+from library.models import Library
+from my_settings    import ACCOUNT_SID, AUTH_TOKEN, algorithm, SECRET_KEY
 
 class SendSmSView(View):
     def post(self, request):
@@ -51,5 +53,56 @@ class VerificationView(View):
                     return JsonResponse({'message': 'INVALID_CODE_NUMBER'}, status=401)
                 return JsonResponse({'message': 'CODE_SUCCESS'}, status=200)
                 
+        except KeyError:
+            return JsonResponse({'message': 'KEY_ERROR'}, status=401)
+
+class MobileSignUp(View):
+    def post(self,request):
+        try:
+            data     = json.loads(request.body)
+            mobile   = data['mobile']
+            password = data['password']     
+            birth    = data['birth']
+            gender   = data['gender']
+            nickname = data['nickname']
+           
+            if not re.match(r'^(?=.{8,16}$)(?=.*[a-z])(?=.*[0-9]).*$',password):
+                return JsonResponse({'message': 'INVALID_PASSWORD'}, status=401)
+            if User.objects.filter(mobile=mobile).exists():
+                return JsonResponse({'message' : 'EXIST_MOBILE'}, status=401)
+            if User.objects.filter(nickname=nickname).exists():
+                return JsonResponse({'message' : 'EXIST_NICKNAME'}, status=401)
+            
+            encrypt_pw  = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+            new_library = Library.objects.create(name=f'{nickname}의 서재')
+            usertype    = UserType.objects.get(name='mobile')
+
+            User.objects.create(
+                mobile      = mobile,
+                password    = encrypt_pw,
+                nickname    = nickname,
+                birth       = birth,
+                gender      = gender,
+                library_id  = new_library.id,
+                usertype_id = usertype.id
+                )
+            return JsonResponse({'message': 'SIGNUP_SUCCESS'}, status=200)
+        except KeyError:
+            return JsonResponse({'message': 'KEY_ERROR'}, status=401)
+
+class MobileSignIn(View):
+    def post(self,request):
+        try:
+            data     = json.loads(request.body)
+            mobile   = data['mobile']
+            password = data['password']
+
+            if not re.match(r"(010)\d{4}\d{4}",mobile):
+                return JsonResponse({'message':'INVALID_PHONE_NUMBER'}, status=401)
+            signin_user = User.objects.get(mobile=mobile)
+            if bcrypt.checkpw(password.encode(), signin_user.password.encode()):
+                token = jwt.encode({'id':signin_user.id}, SECRET_KEY, algorithm)
+                return JsonResponse({'message':'SIGNIN_SUCCESS', 'TOKEN':token.decode()}, status=200)
+            return JsonResponse({'message':'WRONG_PASSWORD'}, status=401)
         except KeyError:
             return JsonResponse({'message': 'KEY_ERROR'}, status=401)
