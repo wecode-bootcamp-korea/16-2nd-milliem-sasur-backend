@@ -15,9 +15,8 @@ class Book(models.Model):
     image_url        = models.URLField(max_length=2045, null=True)
     purchase_url     = models.URLField(max_length=2045, null=True)
     author           = models.ForeignKey('Author', on_delete=models.CASCADE, related_name='books')
-    sub_category     = models.ForeignKey('Subcategory', on_delete=models.CASCADE, related_name='books')
+    category         = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='books')
     publisher        = models.ForeignKey('Publisher', on_delete=models.CASCADE, related_name='books')
-    series           = models.ForeignKey('Series', on_delete=models.CASCADE, related_name='books')
     shelf            = models.ManyToManyField('library.Shelf', related_name='books')
     
     class Meta:
@@ -38,12 +37,6 @@ class Publisher(models.Model):
 
     class Meta:
         db_table = 'publishers'
-
-class Series(models.Model):
-    name = models.CharField(max_length=10)
-
-    class Meta:
-        db_table='series'
 
 class Subcategory(models.Model):
     name     = models.CharField(max_length=45)
