@@ -6,6 +6,7 @@ from django.test    import TestCase, Client
 from users.models   import User, UserType
 from library.models import Library
 from my_settings    import SECRET_KEY
+from unittest.mock  import Mock, MagicMock, call
 
 client = Client()
 class MobileSignUpIn(TestCase):

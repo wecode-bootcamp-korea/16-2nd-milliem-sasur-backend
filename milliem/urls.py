@@ -2,5 +2,6 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('book', include('book.urls')),
+    path('users', include('users.urls')),
+    path('library', include('library.urls'))
 ]
