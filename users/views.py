@@ -106,3 +106,28 @@ class MobileSignIn(View):
             return JsonResponse({'message':'WRONG_PASSWORD'}, status=401)
         except KeyError:
             return JsonResponse({'message': 'KEY_ERROR'}, status=401)
+
+class KakaoView(View):
+    def post(self, request): 
+        try:
+            access_token = request.headers['Authorization']
+            headers      = ({'Authorization' : f'Bearer {access_token}'})
+            url          = 'https://kapi.kakao.com/v2/user/me'
+            data         = requests.get(url, headers=headers).json()
+
+            if not User.objects.filter(social_id = data['id']).exists():
+                new_library = Library.objects.create(name=f'{data["properties"]["nickname"]}의 서재')
+                usertype    = UserType.objects.get(name='kakao')
+                new_user    = User.objects.create(
+                    social_id   = data['id'],
+                    nickname    = data['properties']['nickname'],
+                    library     = new_library,
+                    usertype    = usertype
+                    )
+                token = jwt.encode({'id': new_user.id}, SECRET_KEY, algorithm)
+                return JsonResponse({'message':'KAKAO_SIGNUP_SUCCESS', 'TOKEN':token.decode()}, status=200)
+            exist_user = User.objects.get(social_id=data['id'])
+            token      = jwt.encode({'id': exist_user.id}, SECRET_KEY, algorithm)
+            return JsonResponse({'message':'KAKAO_SIGNIN_SUCCESS', 'TOKEN':token.decode()}, status=200)
+        except KeyError:
+            return JsonResponse({'message':'KEY_ERROR'}, status=401)
