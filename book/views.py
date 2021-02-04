@@ -101,7 +101,7 @@ class BookDetailView(View):
                 }
             return JsonResponse({'book_detail':book_detail, 'like':False}, status=200)
         except Book.DoesNotExist:
-            return JsonResponse({'message':'NOT_EXIST_BOOK'}, status=400)
+            return JsonResponse({'MESSAGE':'NOT_EXIST_BOOK'}, status=400)
 
 class ReviewView(View):
     def post(self, request, book_id):
@@ -109,7 +109,6 @@ class ReviewView(View):
             return JsonResponse({"MESSAGE": "NOT_EXIST_BOOK"}, status=400)
         try :
             data = json.loads(request.body)
-            user_id  = request.user
             contents = data['contents']
 
             if len(contents) < 200:
@@ -118,10 +117,10 @@ class ReviewView(View):
                     book_id  = book_id,
                     contents = contents
                 )
-                return JsonResponse({'message':'SUCCESS'}, status=200)
-            return JsonResponse({'message':'LONG_CONTENTS'}, status=400)
+                return JsonResponse({'MESSAGE':'SUCCESS'}, status=200)
+            return JsonResponse({'MESSAGE':'LONG_CONTENTS'}, status=400)
         except KeyError:
-            return JsonResponse({'message':'KEY_ERROR'}, status=400)
+            return JsonResponse({'MESSAGE':'KEY_ERROR'}, status=400)
         except json.JSONDecodeError as e :
             return JsonResponse({'MESSAGE': f'Json_ERROR:{e}'}, status=400)
 
@@ -137,19 +136,19 @@ class ReviewView(View):
             
             return JsonResponse({'review_list':review_list}, status=200)
         except Book.DoesNotExist:
-            return JsonResponse({'message':'NOT_EXIST_BOOK'}, status=400)
+            return JsonResponse({'MESSAGE':'NOT_EXIST_BOOK'}, status=400)
 
     def delete(self, request, book_id):
         try :
-            user_id   = request.user
+            user_id  = request.user
             review_id = request.GET['review_id']
             review    = Review.objects.get(id=review_id)
             if review.user_id == user_id:
                 review.delete()
-                return JsonResponse({'message':'SUCCESS'}, status=204)
-            return JsonResponse({'message':'UNAUTHORIZED'}, status=401)
+                return JsonResponse({'MESSAGE':'SUCCESS'}, status=204)
+            return JsonResponse({'MESSAGE':'UNAUTHORIZED'}, status=401)
         except Review.DoesNotExist:
-            return JsonResponse({'message':'NOT_EXIST_REVIEW'}, status=400)
+            return JsonResponse({'MESSAGE':'NOT_EXIST_REVIEW'}, status=400)
 
 class ReviewLikeView(View):
     def patch(self, request):
@@ -157,14 +156,15 @@ class ReviewLikeView(View):
         try:
             user_id    = request.user
             review_id  = data['review_id']
+            review_id = 1
             if Review.objects.filter(id=review_id).exists():
                 like = ReviewLike.objects.get(user_id=user_id, review_id=review_id)
                 like.delete()
-                return JsonResponse({'message':'CANCEL', 'like':False}, status=200)
-            return JsonResponse({'message':'NOT_EXIST_REVIEW'}, status=400)
+                return JsonResponse({'MESSAGE':'CANCEL', 'like':False}, status=200)
+            return JsonResponse({'MESSAGE':'NOT_EXIST_REVIEW'}, status=400)
         except ReviewLike.DoesNotExist:
             ReviewLike.objects.create(user_id=user_id, review_id=review_id)
-            return JsonResponse({'message':'SUCCESS'}, status=200)
+            return JsonResponse({'MESSAGE':'SUCCESS'}, status=200)
 
 class SearchView(View) :
     def get(self, request, keyword) :
