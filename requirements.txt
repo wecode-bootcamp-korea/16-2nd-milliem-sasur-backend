@@ -10,6 +10,7 @@ Django==3.1.5
 django-cors-headers==3.6.0
 django-extensions==3.1.0
 Faker==5.8.0
+gunicorn==20.0.4
 idna==2.10
 ipython==7.19.0
 ipython-genutils==0.2.0
@@ -18,8 +19,6 @@ jedi==0.18.0
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
 mysqlclient==2.0.3
-numpy==1.19.5
-pandas==1.2.1
 parso==0.8.1
 pexpect==4.8.0
 pickleshare==0.7.5
@@ -28,7 +27,7 @@ ptyprocess==0.7.0
 pycodestyle==2.6.0
 pycparser==2.20
 Pygments==2.7.4
-PyJWT==2.0.0
+PyJWT==1.7.1
 python-dateutil==2.8.1
 pytz==2020.5
 requests==2.25.1
@@ -37,6 +36,7 @@ sqlparse==0.4.1
 text-unidecode==1.3
 toml==0.10.2
 traitlets==5.0.5
+twilio==6.51.1
 urllib3==1.26.2
 wcwidth==0.2.5
 wrapt==1.12.1

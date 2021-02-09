@@ -3,5 +3,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('users', include('users.urls')),
-    path('library', include('library.urls'))
+#    path('library', include('library.urls'))
 ]
